@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+/* Navigation Bar */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: #020617;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+
+/* Main Homepage */
+
+main {
+    text-align: center;
+    margin-top: 70px;
+    padding-bottom: 50px;
+}
+
+.home-section {
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+main > p {
+    font-size: 22px;
+    color: #cbd5e1;
+}
+
+
+/* General Sections */
+
+.password-section,
+.tips-section,
+.info-section,
+.quiz-section {
+    max-width: 900px;
+    margin: 70px auto;
+    padding: 35px;
+    background: #18223a;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Password Checker */
+
+.password-section {
+    max-width: 600px;
+}
+
+.password-section h2,
+.tips-section h2,
+.info-section h2,
+.quiz-section h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.password-section input {
+    width: 70%;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 13px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #38bdf8;
+    color: #020617;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #7dd3fc;
+    transform: translateY(-2px);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+
+/* Password Checklist */
+
+.password-checklist {
+    text-align: left;
+    margin: 20px auto 0;
+    max-width: 350px;
+}
+
+.password-checklist p {
+    color: #cbd5e1;
+    margin: 10px 0;
+}
+
+
+/* Cards */
+
+.tips-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tip-card,
+.info-card,
+.quiz-box {
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+    border: 1px solid #263653;
+    transition: 0.3s;
+}
+
+.tip-card:hover,
+.info-card:hover,
+.quiz-box:hover {
+    transform: translateY(-5px);
+}
+
+.tip-card h3,
+.info-card h3,
+.quiz-box h3 {
+    font-size: 21px;
+    color: #38bdf8;
+}
+
+.tip-card p,
+.info-card p,
+.quiz-box p {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* MFA */
+
+#mfa {
+    max-width: 900px;
+}
+
+#mfa-result {
+    margin-top: 15px;
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+
+/* Quiz */
+
+.quiz-section {
+    margin-bottom: 100px;
+}
+
+.quiz-box {
+    max-width: 650px;
+    margin: auto;
+}
+
+.quiz-box button {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#quiz-result {
+    margin-top: 20px;
+}
+
+
+/* Mobile / Small Screen */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .tips-container {
+        grid-template-columns: 1fr;
+    }
+
+    .password-section,
+    .tips-section,
+    .info-section,
+    .quiz-section {
+        margin: 40px 15px;
+        padding: 25px;
+    }
+
+    .password-section input {
+        width: 100%;
+    }
+
+}

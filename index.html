@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SecurePass</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+
+        <div class="logo">
+            SecurePass
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#">Home</a>
+            <a href="#password-checker">Password Checker</a>
+            <a href="#tips">Security Tips</a>
+            <a href="#attack">Attacks</a>
+            <a href="#mfa">MFA</a>
+            <a href="#quiz">Quiz</a>
+
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <!-- Homepage -->
+        <section class="home-section">
+
+            <h1>How Secure Is Your Password?</h1>
+
+            <p>
+                Protect your accounts with better security.
+            </p>
+
+        </section>
+
+
+        <!-- Password Checker -->
+        <section class="password-section" id="password-checker">
+
+            <h2>Password Strength Checker</h2>
+
+            <p>
+                Enter your password to check how secure it is:
+            </p>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+            >
+
+            <button onclick="checkPassword()">
+                Check Strength
+            </button>
+
+            <h3 id="result"></h3>
+
+
+            <!-- Password Checklist -->
+            <div class="password-checklist">
+
+                <p id="lengthCheck">
+                    ❌ At least 8 characters
+                </p>
+
+                <p id="uppercaseCheck">
+                    ❌ One uppercase letter
+                </p>
+
+                <p id="numberCheck">
+                    ❌ One number
+                </p>
+
+                <p id="specialCheck">
+                    ❌ One special character
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Security Tips -->
+        <section class="tips-section" id="tips">
+
+            <h2>Security Tips</h2>
+
+            <div class="tips-container">
+
+                <div class="tip-card">
+
+                    <h3>Use Strong Passwords</h3>
+
+                    <p>
+                        Use long and unique passwords for your accounts.
+                    </p>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <h3>Don't Reuse Passwords</h3>
+
+                    <p>
+                        Use a different password for every important account.
+                    </p>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <h3>Enable MFA</h3>
+
+                    <p>
+                        Multi-Factor Authentication adds an extra layer
+                        of security.
+                    </p>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <h3>Watch Out for Phishing</h3>
+
+                    <p>
+                        Don't click on suspicious links or share your
+                        passwords.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Cyber Attacks -->
+        <section class="info-section" id="attack">
+
+            <h2>Common Cyber Attacks</h2>
+
+            <div class="tips-container">
+
+
+                <div class="tip-card">
+
+                    <h3>🎣 Phishing</h3>
+
+                    <p>
+                        Phishing uses fake emails, messages or websites
+                        to trick users into sharing passwords or personal
+                        information.
+                    </p>
+
+                    <p>
+                        <strong>Stay Safe:</strong>
+                        Check links carefully and don't share sensitive
+                        information with suspicious sources.
+                    </p>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <h3>🔨 Brute Force Attack</h3>
+
+                    <p>
+                        A brute force attack tries many possible passwords
+                        until the correct password is discovered.
+                    </p>
+
+                    <p>
+                        <strong>Stay Safe:</strong>
+                        Use long, unique passwords and enable MFA.
+                    </p>
+
+                </div>
+
+
+                <div class="tip-card">
+
+                    <h3>🔑 Credential Stuffing</h3>
+
+                    <p>
+                        Credential stuffing uses stolen usernames and
+                        passwords to try accessing other accounts.
+                    </p>
+
+                    <p>
+                        <strong>Stay Safe:</strong>
+                        Use a different password for every account.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MFA -->
+        <section class="info-section" id="mfa">
+
+            <h2>Multi-Factor Authentication</h2>
+
+            <div class="info-card">
+
+                <h3>Why Use MFA?</h3>
+
+                <p>
+                    Multi-Factor Authentication adds an extra layer
+                    of security to your accounts.
+                </p>
+
+                <p>
+                    It can require something you know, something you have,
+                    or something you are.
+                </p>
+
+                <button onclick="showMFA()">
+                    Learn More
+                </button>
+
+                <p id="mfa-result"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Quiz -->
+        <!-- Quiz Section -->
+<section class="quiz-section" id="quiz">
+
+    <h2>Cyber Security Quiz</h2>
+
+    <p>Test your knowledge about password security.</p>
+
+    <div class="quiz-box">
+
+        <h3>Question 1</h3>
+
+        <p>Which password is the strongest?</p>
+
+        <button onclick="checkAnswer('wrong')">
+            password123
+        </button>
+
+        <button onclick="checkAnswer('correct')">
+            R@nd0m!Secure9
+        </button>
+
+        <button onclick="checkAnswer('wrong')">
+            12345678
+        </button>
+
+        <h3 id="quiz-result"></h3>
+
+    </div>
+
+</section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        /* Password Checker */
+
+        function checkPassword() {
+
+            let password =
+                document.getElementById("password").value;
+
+            let result =
+                document.getElementById("result");
+
+
+            if (password.length === 0) {
+
+                result.innerText =
+                    "Please enter a password.";
+
+            }
+
+            else if (password.length < 6) {
+
+                result.innerText =
+                    "Weak password";
+
+            }
+
+            else if (password.length < 10) {
+
+                result.innerText =
+                    "Medium password";
+
+            }
+
+            else {
+
+                result.innerText =
+                    "Strong password!";
+
+            }
+
+
+            /* Password Checklist */
+
+            document.getElementById("lengthCheck").innerText =
+                password.length >= 8
+                ? "✅ At least 8 characters"
+                : "❌ At least 8 characters";
+
+
+            document.getElementById("uppercaseCheck").innerText =
+                /[A-Z]/.test(password)
+                ? "✅ One uppercase letter"
+                : "❌ One uppercase letter";
+
+
+            document.getElementById("numberCheck").innerText =
+                /[0-9]/.test(password)
+                ? "✅ One number"
+                : "❌ One number";
+
+
+            document.getElementById("specialCheck").innerText =
+                /[^A-Za-z0-9]/.test(password)
+                ? "✅ One special character"
+                : "❌ One special character";
+
+        }
+
+
+        /* MFA */
+
+        function showMFA() {
+
+            let result =
+                document.getElementById("mfa-result");
+
+            result.innerText =
+                "MFA protects your account by requiring an additional verification step, such as a code sent to your phone.";
+
+        }
+
+
+        /* Quiz */
+
+        function checkAnswer(answer) {
+
+            let result =
+                document.getElementById("quiz-result");
+
+
+            if (answer === "correct") {
+
+                result.innerText =
+                    "✅ Correct! Great job!";
+
+            }
+
+            else {
+
+                result.innerText =
+                    "❌ Wrong answer. Try again!";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
