@@ -440,15 +440,14 @@
         /* Quiz with score tracking */
 
         let quizScore = 0;
-        let answeredQuestions = {};
+        let solvedQuestions = {};
 
         function checkAnswer(questionNumber, isCorrect, buttonEl) {
 
-            /* Prevent answering the same question twice */
-            if (answeredQuestions[questionNumber]) {
+            /* Already solved correctly - do nothing further */
+            if (solvedQuestions[questionNumber]) {
                 return;
             }
-            answeredQuestions[questionNumber] = true;
 
             let feedback =
                 document.getElementById("quiz-result-" + questionNumber);
@@ -456,34 +455,41 @@
             let box =
                 document.getElementById("quiz-box-" + questionNumber);
 
-            /* Disable all buttons in this question */
-            let buttons = box.getElementsByTagName("button");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].disabled = true;
-            }
-
             if (isCorrect) {
+
+                solvedQuestions[questionNumber] = true;
 
                 feedback.innerText =
                     "✅ Correct! Great job!";
 
+                box.classList.remove("wrong-answer");
                 box.classList.add("correct-answer");
 
+                /* Lock all buttons only once the correct answer is found */
+                let buttons = box.getElementsByTagName("button");
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].disabled = true;
+                }
+
                 quizScore++;
+
+                document.getElementById("quiz-score").innerText =
+                    "Score: " + quizScore + " / 5";
 
             }
 
             else {
 
                 feedback.innerText =
-                    "❌ Wrong answer. Keep learning!";
+                    "❌ Wrong answer. Try again!";
 
                 box.classList.add("wrong-answer");
 
-            }
+                /* Just disable the wrong button so it can't be picked again,
+                   other options stay clickable for another try */
+                buttonEl.disabled = true;
 
-            document.getElementById("quiz-score").innerText =
-                "Score: " + quizScore + " / 5";
+            }
 
         }
 
