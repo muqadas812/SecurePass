@@ -38,6 +38,8 @@
         <!-- Homepage -->
         <section class="home-section">
 
+            <div class="badge">🔒 Cyber Security Awareness</div>
+
             <h1>How Secure Is Your Password?</h1>
 
             <p>
@@ -245,37 +247,91 @@
         </section>
 
 
-        <!-- Quiz -->
         <!-- Quiz Section -->
-<section class="quiz-section" id="quiz">
+        <section class="quiz-section" id="quiz">
 
-    <h2>Cyber Security Quiz</h2>
+            <h2>Cyber Security Quiz</h2>
 
-    <p>Test your knowledge about password security.</p>
+            <p>Test your knowledge about password security.</p>
 
-    <div class="quiz-box">
+            <p class="quiz-score" id="quiz-score">Score: 0 / 5</p>
 
-        <h3>Question 1</h3>
+            <!-- Question 1 -->
+            <div class="quiz-box" id="quiz-box-1">
 
-        <p>Which password is the strongest?</p>
+                <h3>Question 1</h3>
 
-        <button onclick="checkAnswer('wrong')">
-            password123
-        </button>
+                <p>Which password is the strongest?</p>
 
-        <button onclick="checkAnswer('correct')">
-            R@nd0m!Secure9
-        </button>
+                <button onclick="checkAnswer(1, false, this)">password123</button>
+                <button onclick="checkAnswer(1, true, this)">R@nd0m!Secure9</button>
+                <button onclick="checkAnswer(1, false, this)">12345678</button>
 
-        <button onclick="checkAnswer('wrong')">
-            12345678
-        </button>
+                <h4 class="quiz-feedback" id="quiz-result-1"></h4>
 
-        <h3 id="quiz-result"></h3>
+            </div>
 
-    </div>
+            <!-- Question 2 -->
+            <div class="quiz-box" id="quiz-box-2">
 
-</section>
+                <h3>Question 2</h3>
+
+                <p>What does MFA stand for?</p>
+
+                <button onclick="checkAnswer(2, false, this)">Multiple File Access</button>
+                <button onclick="checkAnswer(2, true, this)">Multi-Factor Authentication</button>
+                <button onclick="checkAnswer(2, false, this)">Main Firewall Application</button>
+
+                <h4 class="quiz-feedback" id="quiz-result-2"></h4>
+
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-box" id="quiz-box-3">
+
+                <h3>Question 3</h3>
+
+                <p>What is phishing?</p>
+
+                <button onclick="checkAnswer(3, false, this)">A type of antivirus software</button>
+                <button onclick="checkAnswer(3, true, this)">Fake messages tricking you into sharing info</button>
+                <button onclick="checkAnswer(3, false, this)">A strong password method</button>
+
+                <h4 class="quiz-feedback" id="quiz-result-3"></h4>
+
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-box" id="quiz-box-4">
+
+                <h3>Question 4</h3>
+
+                <p>Why is reusing the same password risky?</p>
+
+                <button onclick="checkAnswer(4, true, this)">One leaked account can compromise all your accounts</button>
+                <button onclick="checkAnswer(4, false, this)">It makes passwords easier to remember safely</button>
+                <button onclick="checkAnswer(4, false, this)">It has no real risk</button>
+
+                <h4 class="quiz-feedback" id="quiz-result-4"></h4>
+
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-box" id="quiz-box-5">
+
+                <h3>Question 5</h3>
+
+                <p>What is a brute force attack?</p>
+
+                <button onclick="checkAnswer(5, false, this)">Sending polite emails to gain trust</button>
+                <button onclick="checkAnswer(5, false, this)">Installing antivirus software</button>
+                <button onclick="checkAnswer(5, true, this)">Trying many password combinations until one works</button>
+
+                <h4 class="quiz-feedback" id="quiz-result-5"></h4>
+
+            </div>
+
+        </section>
 
     </main>
 
@@ -364,27 +420,53 @@
         }
 
 
-        /* Quiz */
+        /* Quiz with score tracking */
 
-        function checkAnswer(answer) {
+        let quizScore = 0;
+        let answeredQuestions = {};
 
-            let result =
-                document.getElementById("quiz-result");
+        function checkAnswer(questionNumber, isCorrect, buttonEl) {
 
+            /* Prevent answering the same question twice */
+            if (answeredQuestions[questionNumber]) {
+                return;
+            }
+            answeredQuestions[questionNumber] = true;
 
-            if (answer === "correct") {
+            let feedback =
+                document.getElementById("quiz-result-" + questionNumber);
 
-                result.innerText =
+            let box =
+                document.getElementById("quiz-box-" + questionNumber);
+
+            /* Disable all buttons in this question */
+            let buttons = box.getElementsByTagName("button");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+            }
+
+            if (isCorrect) {
+
+                feedback.innerText =
                     "✅ Correct! Great job!";
+
+                box.classList.add("correct-answer");
+
+                quizScore++;
 
             }
 
             else {
 
-                result.innerText =
-                    "❌ Wrong answer. Try again!";
+                feedback.innerText =
+                    "❌ Wrong answer. Keep learning!";
+
+                box.classList.add("wrong-answer");
 
             }
+
+            document.getElementById("quiz-score").innerText =
+                "Score: " + quizScore + " / 5";
 
         }
 
